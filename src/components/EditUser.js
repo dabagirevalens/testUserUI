@@ -33,7 +33,8 @@ const EditUser = () => {
             userName,
             givenName,
             surName,
-            DOB
+            DOB,
+            id
         }
 
         const config = {
@@ -42,7 +43,7 @@ const EditUser = () => {
             },
         };
 
-        const response = await axios.patch(`http://localhost:9000/user/edit/${id}`, userData, config)
+        const response = await axios.patch(`http://localhost:9000/user/edit/`, userData, config)
         if (response.data.success) {
             alert('user was edited successfully')
             navigate('/')
