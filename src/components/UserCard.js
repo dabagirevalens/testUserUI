@@ -1,21 +1,37 @@
+import axios from 'axios'
 import React from 'react'
+import { Link } from 'react-router-dom'
 
-const UserCard = ({ props }) => {
+const UserCard = (props) => {
+
+
+    const handleDelete = async () => {
+        return await axios.delete(`http://localhost:9000/user/delete/${props.id}`).then(() => {
+            window.location.reload()
+        })
+    }
+
     return (
         <div className='user-card'>
             <div className="descriptions">
-                <h2>
-                    <span>User Name :</span>{props.userName}
-                </h2>
-                <h2>
+                <p>
+                    <span>User Name : </span>{props.userName}
+                </p>
+                <p>
                     <span>Given Name: </span>{props.givenName}
-                </h2>
-                <h2>
+                </p>
+                <p>
                     <span>SurName : </span> {props.surName}
-                </h2>
-                <h2>
+                </p>
+                <p>
                     <span>DOB : </span> {props.dob}
-                </h2>
+                </p>
+            </div>
+            <div className="actions">
+                <Link className='edit-icon' to='/edit'>
+                    <i className='bx bxs-edit-alt'></i>
+                </Link>
+                <i className='bx bx-trash-alt' onClick={handleDelete}></i>
             </div>
         </div>
     )

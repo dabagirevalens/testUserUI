@@ -1,33 +1,40 @@
 import React, { useEffect, useState } from 'react'
 import Layout from './Layout'
-import axios from 'axios'
 import UserCard from './UserCard'
 
 const Home = () => {
 
     const [users, setUsers] = useState([])
 
-
     const getUsers = async () => {
-        const response = await axios.get('http://localhost:9000/user')
-        const userData = response.data.users
+        const response = await fetch("http://localhost:9000/user")
+        const data = await response.json()
 
-        setUsers(JSON.stringify(userData))
+        setUsers(data.users)
     }
-
 
     useEffect(() => {
         getUsers()
-    }, [users])
-
-    let totalUsers = users
+    }, [])
 
 
     return (
         <Layout>
-            {totalUsers.length >0 &&(
-                totalUsers.map((user) => <UserCard />)
-            )}
+            <div className="users">
+                {users.length > 0 ? users.map(u => (
+                    <div className="" key={u._id}>
+                        <UserCard
+                            userName={u.userName}
+                            givenName={u.givenName}
+                            surName={u.surName}
+                            dob={u.DOB}
+                            id={u._id}
+                        />
+                    </div>
+                )) : <div className="no-users">
+                    <h4 style={{ textAlign: 'center', margin : '4em auto' }}>There is no users.</h4>
+                </div>}
+            </div>
         </Layout>
     )
 }
