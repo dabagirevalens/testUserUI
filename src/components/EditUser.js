@@ -1,18 +1,28 @@
-import axios from "axios";
-import React, { useState } from "react";
-import Layout from "./Layout";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import Layout from './Layout'
+import axios from 'axios'
+import { useParams, useNavigate } from 'react-router-dom'
 
-const NewUser = () => {
+const EditUser = () => {
 
+    const { id } = useParams()
     const navigate = useNavigate()
 
     const [user, setUser] = useState({
-        userName: 'John',
-        givenName: 'deo',
-        surName: 'smith',
-        DOB: '01/01/2000'
+        userName: '',
+        givenName: '',
+        surName: '',
+        DOB: ''
     })
+
+    useEffect(() => {
+        const getUserData = async () => {
+            const response = await axios.get(`http://localhost:9000/user/${id}`)
+            setUser(response.data.user)
+        }
+
+        getUserData()
+    }, [id])
 
     const { userName, givenName, surName, DOB } = user
 
@@ -32,10 +42,10 @@ const NewUser = () => {
             },
         };
 
-        const response = await axios.post("http://localhost:9000/user/new", userData, config)
+        const response = await axios.patch(`http://localhost:9000/user/edit/${id}`, userData, config)
         if (response.data.success) {
+            alert('user was edited successfully')
             navigate('/')
-            alert('new user was added')
         }
     }
 
@@ -93,11 +103,11 @@ const NewUser = () => {
                             onChange={onChange}
                         />
                     </div>
-                    <button type="submit" className="btn">Add User</button>
+                    <button type="submit" className="btn">Update User</button>
                 </form>
             </div>
         </Layout>
-    );
-};
+    )
+}
 
-export default NewUser;
+export default EditUser

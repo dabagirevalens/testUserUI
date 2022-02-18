@@ -7,6 +7,7 @@ const UserCard = (props) => {
 
     const handleDelete = async () => {
         return await axios.delete(`http://localhost:9000/user/delete/${props.id}`).then(() => {
+            alert('user was deleted successfully')
             window.location.reload()
         })
     }
@@ -28,7 +29,7 @@ const UserCard = (props) => {
                 </p>
             </div>
             <div className="actions">
-                <Link className='edit-icon' to='/edit'>
+                <Link className='edit-icon' to={`/edit/${props.id}`} >
                     <i className='bx bxs-edit-alt'></i>
                 </Link>
                 <i className='bx bx-trash-alt' onClick={handleDelete}></i>

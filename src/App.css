@@ -63,3 +63,48 @@ li a{
 .bx-trash-alt{
   color: red;
 }
+
+
+/* ================== form ================= */
+
+.form{
+  margin: 2em auto;
+  width: 45%;
+  box-shadow: 10px 10px 10px rgba(0,0,0,.1);
+  border-radius: 6px;
+  padding: 1em;
+}
+
+.user-form{
+  width: 100%;
+}
+
+.user-form h1{
+  text-align: center;
+  margin: .5em auto;
+}
+
+.user-form .form-group{
+  width: 100%;
+  padding-left: 2em;
+  margin: .5em 0;
+}
+
+.user-form  label{
+  display: block;
+  font-size: 18px;
+}
+
+.user-form input{
+  width: 80%;
+  outline: none;
+}
+
+.btn{
+  border: none;
+  background: rgb(188, 233, 233);
+  padding: .7em 1.4em;
+  margin: 1em 0 0 2em;
+  border-radius: 6px;
+  cursor: pointer;
+}
